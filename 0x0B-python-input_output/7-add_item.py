@@ -1,22 +1,18 @@
 #!/usr/bin/python3
-"""Program to save strings from command line arguments to file called
-`add_item.json`. File contains a json serialized list of all strings
-entered as arguments to the program.
-"""
+'''
+Module that adds args to JSON file
+'''
 
-if __name__ == "__main__":
-    import sys
-    import json
-    save_to_json_file = \
-        __import__('7-save_to_json_file').save_to_json_file
-    load_from_json_file = \
-        __import__('8-load_from_json_file').load_from_json_file
+import sys
+import os
 
-    filename = "add_item.json"
-    with open(filename, 'a+') as f:  # Create add_item.json, if necessary
-        if f.tell() == 0:
-            json.dump([], f)
-    file_data = load_from_json_file("add_item.json")
-    if len(sys.argv) > 1:
-        file_data.extend(sys.argv[1:])
-    save_to_json_file(file_data, filename)
+arg_list = sys.argv[1:]
+
+save_JSON = __import__('5-save_to_json_file').save_to_json_file
+load_JSON = __import__('6-load_from_json_file').load_from_json_file
+
+lisst = []
+if os.path.exists('add_item.json'):
+    lisst = load_JSON('add_item.json')
+
+save_JSON(lisst + arg_list, "add_item.json")

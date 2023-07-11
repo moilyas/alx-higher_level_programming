@@ -1,24 +1,24 @@
 #!/usr/bin/python3
-"""
-Defines pasacal triangle that create list of lists
-"""
+'''
+Module For pascal_triangle..
+'''
 
 
 def pascal_triangle(n):
-    """
-    defines triangle module
-    """
+    """Pascal Triangle.."""
+
+    triangle = []
     if n <= 0:
-        return []
-    temp = []
-    l = []
-    for i in range(n):
-        row = []
-        for j in range(i + 1):
-            if i == 0 or j == 0 or i == j:
-                row.append(1)
-            else:
-                row.append(l[j] + l[j - 1])
-        l = row
-        temp.append(row)
-    return temp
+        return triangle
+
+    triangle = [[1]]
+    for i in range(n - 1):
+        line = triangle[-1]
+        aux = [1]
+        for i in range(len(line) - 1):
+            aux.append(line[i] + line[i + 1])
+        aux.append(1)
+        triangle.append(aux)
+    return triangle
+
+
